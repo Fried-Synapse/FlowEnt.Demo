@@ -1,0 +1,3 @@
+[submodule "Assets/FriedSynapse.Kit.Unity"]
+	path = Assets/FriedSynapse.Kit.Unity
+	url = https://github.com/Fried-Synapse/FriedSynapse.Kit.Unity.git

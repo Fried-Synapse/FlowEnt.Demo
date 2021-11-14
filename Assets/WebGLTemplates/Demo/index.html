@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>FlowEnt Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="unity-canvas"
+    style="background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}"></canvas>
+  <script src="Build/{{{ LOADER_FILENAME }}}?v={{{ PRODUCT_VERSION }}}"></script>
+  <script>
+    var unityCanvas = document.querySelector("#unity-canvas");
+
+    const observer = new window.IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && window.hasUnityPlayer != true) {
+        createPlayer();
+      }
+    }, {
+      root: null,
+      threshold: 0.1,
+    })
+
+    observer.observe(unityCanvas);
+
+    function createPlayer() {
+      window.hasUnityPlayer = true;
+      unityInstance = createUnityInstance(unityCanvas, {
+        dataUrl: "Build/{{{ DATA_FILENAME }}}",
+        frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: "Build/{{{ CODE_FILENAME }}}",
+        #if MEMORY_FILENAME
+          memoryUrl: "Build/{{{ MEMORY_FILENAME }}}",
+        #endif
+        #if SYMBOLS_FILENAME
+          symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+        #endif
+          streamingAssetsUrl: "StreamingAssets",
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
+      });
+    }
+  </script>
+</body>
+
+</html>
