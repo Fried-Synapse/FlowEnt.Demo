@@ -1,4 +1,4 @@
-name: FlowEnt.Demo Build
+name: Build
 
 on: push
 
@@ -53,5 +53,6 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          branch: prod
+          repository-name: Fried-Synapse/FlowEnt
+          branch: demo/main
           folder: build/WebGL
