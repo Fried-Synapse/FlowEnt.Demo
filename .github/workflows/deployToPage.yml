@@ -53,6 +53,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
+          token: ${{ secrets.ACCESS_TOKEN }}
           repository-name: Fried-Synapse/FlowEnt
           branch: demo/main
           folder: build/WebGL
