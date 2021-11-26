@@ -1,6 +1,9 @@
 name: Build
 
-on: push
+on: 
+  push:
+    branches:
+      main
 
 jobs:
   buildWebGL:
@@ -54,5 +57,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          branch: demo/main
+          branch: prod
           folder: build/WebGL
