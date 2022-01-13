@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/FriedSynapse.Kit.Unity/Scripts/Components/Splash/Scenes/Splash.unity
     guid: 8ff2c3ab2866b4f5580b608a57574604
   - enabled: 1
+    path: Assets/Scenes/SceneManager.unity
+    guid: 25c7b4409363c4e65b9fb65dc2ba22ea
+  - enabled: 1
     path: Assets/FriedSynapse.Kit.Unity/Plugins/FlowEnt/Demo/Scenes/FlowEnt.Demo.unity
     guid: 0d6578e1c78494b4baeba3c64754a1dd
+  - enabled: 1
+    path: Assets/FriedSynapse.Kit.Unity/Plugins/FlowEnt/Demo/Scenes/FlowEnt.Demo.Character.unity
+    guid: c2120971a37dc4a27b1f906acc433c0d
   m_configObjects: {}
