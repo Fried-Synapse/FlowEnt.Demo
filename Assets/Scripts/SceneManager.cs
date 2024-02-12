@@ -17,7 +17,7 @@ namespace FlowEnt.Demo
             string sceneParam = HttpUtility.ParseQueryString(myUri.Query).Get("scene");
             string sceneName = sceneParam switch
             {
-                "character" => "FlowEnt.Demo.Character",
+                "echoes" => "FlowEnt.Demo.Echoes",
                 "authoring" => "FlowEnt.Demo.Authoring",
                 _ => "FlowEnt.Demo",
             };
