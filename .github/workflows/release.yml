@@ -5,57 +5,32 @@ on:
     branches:
       main
 
+permissions:
+  pages: write
+  id-token: write
+
 jobs:
-  build:
-    name: Build for WebGL 🖥️
+  publish:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
           token: ${{ secrets.ACCESS_TOKEN }}
-      - name: Cache Ligrary
-        uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
       - name: Build
         uses: webbertakken/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
-      - uses: actions/upload-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: FlowEnt.Demo
-          path: build/WebGL
-
-
-  deploy:
-    needs: build
-    name: Deploy Demo 🚀
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: FlowEnt.Demo
-          path: build
-
-      - name: Display structure of root files
-        run: ls -R
-        working-directory: build/WebGL
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          branch: prod
-          folder: build/WebGL
+          path: 'build/WebGL'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
